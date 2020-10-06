@@ -8,4 +8,6 @@ Then run:
 for file in $(ls main/test*.py); do
     python3 $file
 done
+
+python3 -m main
 ```

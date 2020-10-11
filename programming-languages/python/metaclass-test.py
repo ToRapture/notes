@@ -1,18 +1,18 @@
 class MetaClass(type):
     # Once the class namespace has been populated by executing the class body,
-    # the class object is created by calling metaclass(name, bases, namespace, **kwds)
-    def __new__(cls, name, bases, namespace, **kwargs):
-        print('MetaClass.__new__: cls[%s], name[%s], bases[%s], namespace[%s], kwargs[%s]' % (cls, name, bases, namespace, kwargs))
+    # the class object is created by calling metaclass(name, bases, namespace, **kwargs)
+    def __new__(mcs, name, bases, namespace, **kwargs):
+        print('MetaClass.__new__: mcs[%s], name[%s], bases[%s], namespace[%s], kwargs[%s]' % (mcs, name, bases, namespace, kwargs))
 
         namespace['foo'] = 'added in __new__'
         for k, v in kwargs.items():
             namespace[k] = v
 
-        return super().__new__(cls, name, bases, namespace)
+        return super().__new__(mcs, name, bases, namespace)
 
-    def __init__(self, name, bases, namespace, **kwargs):
-        print('MetaClass.__init__: self[%s], name[%s], bases[%s], namespace[%s], kwargs[%s]' % (self, name, bases, namespace, kwargs))
-        self.bar = 'added in __init__'
+    def __init__(cls, name, bases, namespace, **kwargs):
+        print('MetaClass.__init__: cls[%s], name[%s], bases[%s], namespace[%s], kwargs[%s]' % (cls, name, bases, namespace, kwargs))
+        cls.bar = 'added in __init__'
         super().__init__(name, bases, namespace, **kwargs)
 
 
